@@ -7,164 +7,309 @@
     <name>at91sam3u4_flash</name>
     <outputs>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\pmc.o</file>
+      <file>$TOOLKIT_DIR$\inc\c\intrinsics.h</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\dbgu.o</file>
+      <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\exceptions.o</file>
+      <file>$TOOLKIT_DIR$\inc\c\cmsis_iar.h</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\core_cm3.o</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\nvic.o</file>
+      <file>$TOOLKIT_DIR$\inc\c\xencoding_limits.h</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\trace.o</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Threads.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\pio.o</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Product.h</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\board_cstartup_iar.o</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\pwmc2.o</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\board_lowlevel.o</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\main.o</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\board_memories.o</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdio.h</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\pmc.pbi</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\pwmc2.pbi</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\trace.pbi</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\pio.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\board_cstartup_iar.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\c\ystdio.h</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\board_memories.pbi</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Exe\at91sam3u4_flash.out</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\nvic.pbi</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\board_lowlevel.pbi</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\dbgu.pbi</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\exceptions.pbi</file>
+      <file>$PROJ_DIR$\at91sam3u4_flash\List\board_lowlevel.lst</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\main.pbi</file>
+      <file>$TOOLKIT_DIR$\lib\shb_l.a</file>
+      <file>$PROJ_DIR$\at91sam3u4_flash\List\board_cstartup_iar.lst</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Full.h</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Exe\at91sam3u4_flash.bin</file>
+      <file>$TOOLKIT_DIR$\lib\dl7M_tlf.a</file>
+      <file>$TOOLKIT_DIR$\lib\rt7M_tl.a</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\at91sam3u-ek.pbd</file>
       <file>$PROJ_DIR$\at91sam3u4_flash\Obj\core_cm3.pbi</file>
+      <file>$PROJ_DIR$\at91sam3u4_flash\List\core_cm3.lst</file>
+      <file>$PROJ_DIR$\at91sam3u4_flash\List\board_memories.lst</file>
+      <file>$TOOLKIT_DIR$\lib\m7M_tl.a</file>
+      <file>$PROJ_DIR$\at91sam3u4_flash\List\dbgu.lst</file>
+      <file>$PROJ_DIR$\at91sam3u4_flash\List\main.lst</file>
+      <file>$PROJ_DIR$\at91sam3u4_flash\List\pwmc2.lst</file>
+      <file>$PROJ_DIR$\at91sam3u4_flash\List\pmc.lst</file>
+      <file>$PROJ_DIR$\at91sam3u4_flash\List\pio.lst</file>
+      <file>$PROJ_DIR$\at91sam3u4_flash\List\at91sam3u4_flash.map</file>
+      <file>$PROJ_DIR$\at91sam3u4_flash\List\trace.lst</file>
+      <file>$PROJ_DIR$\at91sam3u4_flash\List\nvic.lst</file>
+      <file>$PROJ_DIR$\at91sam3u4_flash\List\exceptions.lst</file>
       <file>$PROJ_DIR$\..\..\..\at91lib\boards\at91sam3u-ek\board_lowlevel.c</file>
+      <file>$PROJ_DIR$\..\..\..\at91lib\boards\at91sam3u-ek\board_lowlevel.h</file>
       <file>$PROJ_DIR$\..\..\..\at91lib\boards\at91sam3u-ek\board_memories.c</file>
+      <file>$PROJ_DIR$\..\..\..\at91lib\boards\at91sam3u-ek\board_memories.h</file>
       <file>$PROJ_DIR$\..\..\..\at91lib\boards\at91sam3u-ek\exceptions.c</file>
+      <file>$PROJ_DIR$\..\..\..\at91lib\boards\at91sam3u-ek\exceptions.h</file>
       <file>$PROJ_DIR$\..\..\..\at91lib\boards\at91sam3u-ek\board_cstartup_iar.c</file>
       <file>$PROJ_DIR$\..\..\..\at91lib\peripherals\dbgu\dbgu.c</file>
+      <file>$PROJ_DIR$\..\..\..\at91lib\peripherals\dbgu\dbgu.h</file>
+      <file>$PROJ_DIR$\..\..\..\at91lib\peripherals\irq\irq.h</file>
       <file>$PROJ_DIR$\..\..\..\at91lib\peripherals\irq\nvic.c</file>
       <file>$PROJ_DIR$\..\..\..\at91lib\peripherals\pio\pio.c</file>
+      <file>$PROJ_DIR$\..\..\..\at91lib\peripherals\pio\pio.h</file>
       <file>$PROJ_DIR$\..\..\..\at91lib\peripherals\pmc\pmc.c</file>
+      <file>$PROJ_DIR$\..\..\..\at91lib\boards\at91sam3u-ek\at91sam3u4\AT91SAM3U4.h</file>
+      <file>$PROJ_DIR$\..\..\..\at91lib\boards\at91sam3u-ek\at91sam3u4\chip.h</file>
+      <file>$PROJ_DIR$\..\..\..\at91lib\peripherals\pmc\pmc.h</file>
       <file>$PROJ_DIR$\..\..\..\at91lib\peripherals\pwmc\pwmc2.c</file>
+      <file>$PROJ_DIR$\..\..\..\at91lib\peripherals\pwmc\pwmc2.h</file>
+      <file>$PROJ_DIR$\..\..\..\at91lib\utility\assert.h</file>
       <file>$PROJ_DIR$\..\..\..\at91lib\utility\trace.c</file>
+      <file>$PROJ_DIR$\..\..\..\at91lib\utility\trace.h</file>
       <file>$PROJ_DIR$\..\..\..\external_libs\cmsis\core_cm3.c</file>
+      <file>$PROJ_DIR$\..\..\..\external_libs\cmsis\core_cm3.h</file>
       <file>$PROJ_DIR$\..\main.c</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdarg.h</file>
+      <file>$PROJ_DIR$\..\..\..\at91lib\boards\at91sam3u-ek\board.h</file>
+      <file>$PROJ_DIR$\..\..\..\at91lib\boards\at91sam3u-ek\at91sam3u4\flash.icf</file>
     </outputs>
     <file>
       <name>$PROJ_DIR$\at91sam3u4_flash\Exe\at91sam3u4_flash.out</name>
       <outputs>
         <tool>
+          <name>ILINK</name>
+          <file> 53</file>
+        </tool>
+        <tool>
           <name>OBJCOPY</name>
-          <file> 24</file>
+          <file> 40</file>
         </tool>
       </outputs>
+      <inputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 84 16 18 20 6 2 4 19 7 14 0 17 9 37 42 47 41</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\at91sam3u4_flash\Obj\at91sam3u-ek.pbd</name>
+      <inputs>
+        <tool>
+          <name>BILINK</name>
+          <file> 27 32 29 44 33 34 36 31 25 22 23 24</file>
+        </tool>
+      </inputs>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\at91lib\boards\at91sam3u-ek\board_lowlevel.c</name>
       <outputs>
         <tool>
           <name>ICCARM</name>
-          <file> 9</file>
+          <file> 35 18</file>
         </tool>
         <tool>
           <name>BICOMP</name>
-          <file> 20</file>
+          <file> 32</file>
         </tool>
       </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 83 72 71 60 58 69</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 83 72 71 60 58 69</file>
+        </tool>
+      </inputs>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\at91lib\boards\at91sam3u-ek\board_memories.c</name>
       <outputs>
         <tool>
           <name>ICCARM</name>
-          <file> 11</file>
+          <file> 46 20</file>
         </tool>
         <tool>
           <name>BICOMP</name>
-          <file> 17</file>
+          <file> 29</file>
         </tool>
       </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 83 72 71 69</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 83 72 71 69</file>
+        </tool>
+      </inputs>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\at91lib\boards\at91sam3u-ek\exceptions.c</name>
       <outputs>
         <tool>
           <name>ICCARM</name>
-          <file> 2</file>
+          <file> 56 4</file>
         </tool>
         <tool>
           <name>BICOMP</name>
-          <file> 22</file>
+          <file> 34</file>
         </tool>
       </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 62</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 62</file>
+        </tool>
+      </inputs>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\at91lib\boards\at91sam3u-ek\board_cstartup_iar.c</name>
       <outputs>
         <tool>
           <name>ICCARM</name>
-          <file> 7</file>
+          <file> 38 16</file>
         </tool>
         <tool>
           <name>BICOMP</name>
-          <file> 16</file>
+          <file> 27</file>
         </tool>
       </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 83 72 71 62 58</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 83 72 71 62 58</file>
+        </tool>
+      </inputs>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\at91lib\peripherals\dbgu\dbgu.c</name>
       <outputs>
         <tool>
           <name>ICCARM</name>
-          <file> 1</file>
+          <file> 48 2</file>
         </tool>
         <tool>
           <name>BICOMP</name>
-          <file> 21</file>
+          <file> 33</file>
         </tool>
       </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 65 83 72 71</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 65 83 72 71</file>
+        </tool>
+      </inputs>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\at91lib\peripherals\irq\nvic.c</name>
       <outputs>
         <tool>
           <name>ICCARM</name>
-          <file> 4</file>
+          <file> 55 7</file>
         </tool>
         <tool>
           <name>BICOMP</name>
-          <file> 19</file>
+          <file> 31</file>
         </tool>
       </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 83 72 71 66 80 10 11 3 13 39 15 8 12 1 5 62 78 69 21 26 28 65</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 83 72 71 66 80 10 11 3 13 15 8 12 1 5 62 78 69 21 26 28 65</file>
+        </tool>
+      </inputs>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\at91lib\peripherals\pio\pio.c</name>
       <outputs>
         <tool>
           <name>ICCARM</name>
-          <file> 6</file>
+          <file> 52 14</file>
         </tool>
         <tool>
           <name>BICOMP</name>
-          <file> 15</file>
+          <file> 25</file>
         </tool>
       </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 69 83 72 71</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 69 83 72 71</file>
+        </tool>
+      </inputs>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\at91lib\peripherals\pmc\pmc.c</name>
       <outputs>
         <tool>
           <name>ICCARM</name>
-          <file> 0</file>
+          <file> 51 0</file>
         </tool>
         <tool>
           <name>BICOMP</name>
-          <file> 12</file>
+          <file> 22</file>
         </tool>
       </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 73 83 72 71 76 21 11 3 13 39 15 8 12 26 28 78 69 65</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 73 83 72 71 76 21 11 3 13 15 8 12 26 28 78 69 65</file>
+        </tool>
+      </inputs>
     </file>
     <file>
       <name>[ROOT_NODE]</name>
       <outputs>
         <tool>
           <name>ILINK</name>
-          <file> 18</file>
+          <file> 30 53</file>
         </tool>
       </outputs>
     </file>
@@ -173,57 +318,93 @@
       <outputs>
         <tool>
           <name>ICCARM</name>
-          <file> 8</file>
-        </tool>
-        <tool>
-          <name>BICOMP</name>
-          <file> 13</file>
-        </tool>
-      </outputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\at91lib\utility\trace.c</name>
-      <outputs>
-        <tool>
-          <name>ICCARM</name>
-          <file> 5</file>
-        </tool>
-        <tool>
-          <name>BICOMP</name>
-          <file> 14</file>
-        </tool>
-      </outputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\external_libs\cmsis\core_cm3.c</name>
-      <outputs>
-        <tool>
-          <name>ICCARM</name>
-          <file> 3</file>
-        </tool>
-        <tool>
-          <name>BICOMP</name>
-          <file> 26</file>
-        </tool>
-      </outputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\main.c</name>
-      <outputs>
-        <tool>
-          <name>ICCARM</name>
-          <file> 10</file>
+          <file> 50 17</file>
         </tool>
         <tool>
           <name>BICOMP</name>
           <file> 23</file>
         </tool>
       </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 75 83 72 71 76 21 11 3 13 39 15 8 12 26 28 78 69 65</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 75 83 72 71 76 21 11 3 13 15 8 12 26 28 78 69 65</file>
+        </tool>
+      </inputs>
     </file>
-    <forcedrebuild>
-      <name>[MULTI_TOOL]</name>
-      <tool>ILINK</tool>
-    </forcedrebuild>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\at91lib\utility\trace.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 54 9</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 24</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 78 83 72 71 69 21 11 3 13 39 15 8 12 26 28 65 82</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 78 83 72 71 69 21 11 3 13 15 8 12 26 28 65 82</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\external_libs\cmsis\core_cm3.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 45 6</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 44</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 10 11 3 13 39 15 8 12</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 10 11 3 13 15 8 12</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\main.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 49 19</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 36</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 83 72 71 69 66 80 10 11 3 13 39 15 8 12 1 5 65 75 78 21 26 28</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 83 72 71 69 66 80 10 11 3 13 15 8 12 1 5 65 75 78 21 26 28</file>
+        </tool>
+      </inputs>
+    </file>
   </configuration>
   <configuration>
     <name>at91sam3u4_sram</name>

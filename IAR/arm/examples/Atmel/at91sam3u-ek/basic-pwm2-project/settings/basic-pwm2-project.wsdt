@@ -16,9 +16,16 @@
           <Column3>27</Column3>
         </ColumnWidths>
       </Workspace>
+      <Build>
+        <ColumnWidth0>20</ColumnWidth0>
+        <ColumnWidth1>980</ColumnWidth1>
+        <ColumnWidth2>261</ColumnWidth2>
+        <ColumnWidth3>65</ColumnWidth3>
+      </Build>
+      <TerminalIO/>
     </Static>
     <Windows>
-      <Wnd1>
+      <Wnd0>
         <Tabs>
           <Tab>
             <Identity>TabID-28000-12080</Identity>
@@ -30,6 +37,17 @@
                 <ExpandedNode>at91sam3u-ek/basic-pwm2-project</ExpandedNode>
               </NodeDict>
             </Session>
+          </Tab>
+        </Tabs>
+        <SelectedTab>0</SelectedTab>
+      </Wnd0>
+      <Wnd1>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-24340-12149</Identity>
+            <TabName>Build</TabName>
+            <Factory>Build</Factory>
+            <Session/>
           </Tab>
         </Tabs>
         <SelectedTab>0</SelectedTab>
@@ -45,11 +63,19 @@
           <Factory>TextEditor</Factory>
           <Filename>$WS_DIR$\main.c</Filename>
           <XPos>0</XPos>
-          <YPos>98</YPos>
-          <SelStart>5590</SelStart>
-          <SelEnd>5590</SelEnd>
+          <YPos>240</YPos>
+          <SelStart>9438</SelStart>
+          <SelEnd>9438</SelEnd>
         </Tab>
         <ActiveTab>1</ActiveTab>
+        <Tab>
+          <Factory>TextEditor</Factory>
+          <Filename>$WS_DIR$\..\..\at91lib\peripherals\dbgu\dbgu.c</Filename>
+          <XPos>0</XPos>
+          <YPos>97</YPos>
+          <SelStart>4623</SelStart>
+          <SelEnd>4623</SelEnd>
+        </Tab>
       </Pane>
       <ActivePane>0</ActivePane>
       <Sizes>
@@ -69,15 +95,18 @@
             </Toolbar-02b22ee8>
           </Sizes>
         </Row0>
+        <Row1>
+          <Sizes/>
+        </Row1>
       </Top>
       <Left>
         <Row0>
           <Sizes>
-            <Wnd1>
+            <Wnd0>
               <Rect>
                 <Top>-2</Top>
                 <Left>-2</Left>
-                <Bottom>651</Bottom>
+                <Bottom>453</Bottom>
                 <Right>198</Right>
                 <x>-2</x>
                 <y>-2</y>
@@ -86,9 +115,9 @@
                 <sizeHorzCX>146413</sizeHorzCX>
                 <sizeHorzCY>287356</sizeHorzCY>
                 <sizeVertCX>146413</sizeVertCX>
-                <sizeVertCY>938218</sizeVertCY>
+                <sizeVertCY>653736</sizeVertCY>
               </Rect>
-            </Wnd1>
+            </Wnd0>
           </Sizes>
         </Row0>
       </Left>
@@ -99,7 +128,24 @@
       </Right>
       <Bottom>
         <Row0>
-          <Sizes/>
+          <Sizes>
+            <Wnd1>
+              <Rect>
+                <Top>-2</Top>
+                <Left>-2</Left>
+                <Bottom>198</Bottom>
+                <Right>1368</Right>
+                <x>-2</x>
+                <y>-2</y>
+                <xscreen>1370</xscreen>
+                <yscreen>200</yscreen>
+                <sizeHorzCX>1002928</sizeHorzCX>
+                <sizeHorzCY>287356</sizeHorzCY>
+                <sizeVertCX>146413</sizeVertCX>
+                <sizeVertCY>287356</sizeVertCY>
+              </Rect>
+            </Wnd1>
+          </Sizes>
         </Row0>
       </Bottom>
       <Float>
