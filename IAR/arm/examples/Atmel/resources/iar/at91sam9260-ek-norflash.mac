@@ -1,0 +1,48 @@
+// ---------------------------------------------------------
+//   ATMEL Microcontroller Software Support  -  ROUSSET  -
+// ---------------------------------------------------------
+// The software is delivered "AS IS" without warranty or
+// condition of any  kind, either express, implied or
+// statutory. This includes without limitation any warranty
+// or condition with respect to merchantability or fitness
+// for any particular purpose, or against the infringements of
+// intellectual property rights of others.
+// ---------------------------------------------------------
+
+/*********************************************************************
+*
+*       execUserReset() : JTAG set initially to Full Speed
+*/
+execUserReset()
+{
+    __message "------------------------------ execUserReset ---------------------------------";
+    __message "-------------------------------Set PC Reset ----------------------------------";
+}
+
+/*********************************************************************
+*
+*       execUserPreload() : JTAG set initially to 32kHz
+*/
+execUserPreload()
+{
+    __message "------------------------------ execUserPreload ---------------------------------";
+    __hwReset(0);                          //* Hardware Reset: CPU is automatically halted after the reset (JTAG is already configured to 32kHz)
+    __writeMemory32(0xD3,0x98,"Register"); //*  Set CPSR
+    _InitRSTC();                           //* Enable User Reset to allow execUserReset() execution
+}
+
+
+
+/*********************************************************************
+*
+*       _InitRSTC()
+*
+* Function description
+*   Initializes the RSTC (Reset controller).
+*   This makes sense since the default is to not allow user resets, which makes it impossible to
+*   apply a second RESET via J-Link
+*/
+_InitRSTC() {
+    __writeMemory32(0xA5000001, 0xFFFFFD08,"Memory");    // Allow user reset
+}
+

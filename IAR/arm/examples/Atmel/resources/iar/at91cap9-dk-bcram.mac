@@ -1,0 +1,281 @@
+// ---------------------------------------------------------
+//   ATMEL Microcontroller Software Support  -  ROUSSET  -
+// ---------------------------------------------------------
+// The software is delivered "AS IS" without warranty or
+// condition of any  kind, either express, implied or
+// statutory. This includes without limitation any warranty
+// or condition with respect to merchantability or fitness
+// for any particular purpose, or against the infringements of
+// intellectual property rights of others.
+// ---------------------------------------------------------
+//  File: at91cap9-dk-bcram.mac
+//  User setup file for CSPY debugger.
+//  1.1 20/Dec/07 oar    : Creation
+//
+//  $Revision: 35840 $
+//
+// ---------------------------------------------------------
+__var __mac_i;
+__var __mac_pt;
+__var __val_tmp;
+
+/*********************************************************************
+*
+*       execUserReset() : JTAG set initially to Full Speed
+*/
+execUserReset()
+{
+    __message "------------------------------ execUserReset ---------------------------------";
+    _MapRAMAt0();                          //* Set the RAM memory at 0x00200000 & 0x00000000
+    __PllSetting();                        //* Init PLL
+    __PllSetting100MHz();
+    __message "-------------------------------Set PC Reset ----------------------------------";
+}
+
+/*********************************************************************
+*
+*       execUserPreload() : JTAG set initially to 32kHz
+*/
+execUserPreload()
+{
+    __message "------------------------------ execUserPreload ---------------------------------";
+    __hwReset(0);                          //* Hardware Reset: CPU is automatically halted after the reset (JTAG is already configured to 32kHz)
+    __writeMemory32(0xD3,0x98,"Register"); //*  Set CPSR
+    __PllSetting();                        //* Init PLL
+    __PllSetting100MHz();
+    __initBCRAM();                         //* Init BCRAM before load
+    _MapRAMAt0();                          //* Set the RAM memory at 0x0040 0000 & 0x0000 0000
+    _InitRSTC();                           //* Enable User Reset to allow execUserReset() execution
+}
+
+
+
+/*********************************************************************
+*
+*       _InitRSTC()
+*
+* Function description
+*   Initializes the RSTC (Reset controller).
+*   This makes sense since the default is to not allow user resets, which makes it impossible to
+*   apply a second RESET via J-Link
+*/
+_InitRSTC() {
+    __writeMemory32(0xA5000001, 0xFFFFFD08,"Memory");    // Allow user reset
+}
+
+
+/*********************************************************************
+*
+*       __initBCRAM()
+* Function description
+* Set BCRAM for works at 100 MHz
+*/
+__initBCRAM()
+{
+    // Configure EBICSA
+    // -------------------------------------------------------------------------
+    // AT91C_BASE_CCFG->CCFG_EBICSA |= AT91C_EBI_SUP_1V8;  // Vddiomsel 1.8V // 0x00010000 reset value
+    // AT91C_BASE_CCFG->CCFG_EBICSA |= AT91C_EBI_CS1A_BCRAMC;
+    __writeMemory32(0x00000002,0xFFFFEB20,"Memory");
+    // display EBICSA
+    __val_tmp = __readMemory32(0xFFFFEB20,"Memory");
+    __message "----- AT91C_BASE_CCFG->CCFG_EBICSA  : 0x",__val_tmp:%X;
+  
+    // Configure A23 and A24 PIO as Periph A
+    // -------------------------------------------------------------------------
+    //#define AT91C_PIOD_PDR  (AT91_CAST(AT91_REG *) 	0xFFFFF804) // (PIOD) PIO Disable Register
+    //#define AT91C_PIOD_ASR  (AT91_CAST(AT91_REG *) 	0xFFFFF870) // (PIOD) Select A Register
+    //AT91C_BASE_PIOD->PIO_PDR = AT91C_PIO_PD12 | AT91C_PIO_PD13;
+    //AT91C_BASE_PIOD->PIO_ASR = AT91C_PIO_PD12 | AT91C_PIO_PD13;
+    __writeMemory32(0x00003000,0xFFFFF804,"Memory");
+    __writeMemory32(0x00003000,0xFFFFF870,"Memory");
+            
+    // 2. The Cellular Ram  memory type must be set in the BCRAMC Memory Device Register.
+    // -------------------------------------------------------------------------
+    //#define AT91C_BCRAMC_MDR (AT91_CAST(AT91_REG *) 	0xFFFFE410) // (BCRAMC) BCRAM Memory Device Register
+    // Burst CellularRAM Version 1.5 
+    // (BCRAMC_MDR = 0x00000001)
+    //AT91C_BASE_BCRAMC->BCRAMC_MDR = AT91C_BCRAMC_MD_BCRAM_V15;            
+    __writeMemory32(0x00000001,0xFFFFE410,"Memory");
+    
+    // 3. Temperature compensated self refresh (TCSR) and partial array 
+    //    refresh (PAR) must be set in the BCRAMC Low Power register.    
+    // -------------------------------------------------------------------------    
+    // #define AT91C_BCRAMC_LPR (AT91_CAST(AT91_REG *) 	0xFFFFE40C) // (BCRAMC) BCRAM Controller Low Power Register
+    // Low power register => Low-power is inhibited, Internal Temperature Sensor choosen
+    // PAR[2:0]      : Partial Array Refresh = 000 (Full Array)
+    // TCR_TCSR[5:4] : Temperature Compensated Refresh/Self-refresh = 00 (Internal sensor or 70°C)
+    // LPCB[9:8]     : Low Power Command Bit = 00 (Low power Feature inhibited)
+    // (BCRAMC_LPR    = 0x00000000)
+    // AT91C_BASE_BCRAMC->BCRAMC_LPR = AT91C_BCRAMC_PAR_FULL | 
+    //                                 //AT91C_BCRAMC_TCR_INTERNAL_OR_70C | 
+    //                                 AT91C_BCRAMC_LPCB_DISABLE;
+    __writeMemory32(0x00000000,0xFFFFE40C,"Memory");                                     
+       
+    // High Speed Register
+    // #define AT91C_BCRAMC_HSR (AT91_CAST(AT91_REG *) 	0xFFFFE408) // (BCRAMC) BCRAM Controller High Speed Register    
+    // DA(0) Decode Cycle = 0 (No decode cycle added)
+    // (BCRAMC_HSR    = 0x00000000)
+    //AT91C_BASE_BCRAMC->BCRAMC_HSR = AT91C_BCRAMC_DA_DISABLE;
+    __writeMemory32(0x00000000,0xFFFFE408,"Memory");
+
+    // 4. Asynchronous timings (TCKA, TCRE..) must be set in the BCRAMC Timing Register.    
+    // -------------------------------------------------------------------------    
+    //#define AT91C_BCRAMC_TPR (AT91_CAST(AT91_REG *) 	0xFFFFE404) // (BCRAMC) BCRAM Controller Timing Parameter Register
+    // TCW[3:0]   : Chip Enable to End of Write = 3 
+    // TCRES[5:4] : Control Register Enable Setup = 2 
+    // TCKA[11:8] : BCWE High to BCCK Valid = 0 
+    // (BCRAMC_TPR = 0x00000023)
+    //AT91C_BASE_BCRAMC->BCRAMC_TPR = AT91C_BCRAMC_TCW_3 |
+    //                                AT91C_BCRAMC_TCRES_2 |
+    //                                AT91C_BCRAMC_TCKA_0;
+    __writeMemory32(0x00000023,0xFFFFE404,"Memory");    
+                                      
+    // 5. Cellular Ram  features must be set in the HBCRAMC Configuration Register:
+    // – number rows, latency, drive strength (DS), the data bus width and cram_enabled bit must be high.    
+    // -------------------------------------------------------------------------        
+    //#define AT91C_BCRAMC_CR (AT91_CAST(AT91_REG *) 	0xFFFFE400) // (BCRAMC) BCRAM Controller Configuration Register
+    // CRAM_EN(0)            : BCRAM enabled = 0
+    // LM[6:4]               : Latency Mode = 011 = 3 cycles (reset value)
+    // DBW[8]                : Data Bus Width = 1 (0->32bits / 1->16bits)
+    // BOUNDARY_WORD[13:12]  : Number of Words in Row = 01 = 128 words by row   
+    // ADDRDATA_MUX[16]      : Address and Data bus Multiplexed ? = 0 => NO
+    // DS[21:20]             : Drive Strength = 00 => FULL
+    // VAR_FIX_LAT[24]       : Variable or Fixed latency ? = 0 => VARIABLE
+    // 3 latency cycles, dbw = 16 bits, 128 words per row, address & data bus 
+    // not muxed, full drive strength, variable latency
+    // (BCRAMC_CR    = 0x00001130)
+    // AT91C_BASE_BCRAMC->BCRAMC_CR = AT91C_BCRAMC_CAS_3 |
+    //                                AT91C_BCRAM_NWIR_128 |
+    //                                AT91C_BCRAM_ADMX_NO_MUX |
+    //                                AT91C_BCRAM_DS_FULL_DRIVE |
+    //                                AT91C_BCRAM_VFLAT_VARIABLE;
+    // switch (busWidth) {
+    //     case 16:
+    //         AT91C_BASE_BCRAMC->BCRAMC_CR |= AT91C_BCRAMC_DBW_16_BITS; 
+    //         break;
+    // 
+    //     case 32:
+    //     default:
+    //         AT91C_BASE_BCRAMC->BCRAMC_CR |= AT91C_BCRAMC_DBW_32_BITS; 
+    //         break;
+    // 
+    // }
+    //__writeMemory32(0x00001130,0xFFFFE400,"Memory");
+        
+    // wait
+    //__delay(50);                           
+    //__delay(50);        
+    // + BCRAMC enabled
+    //AT91C_BASE_BCRAMC->BCRAMC_CR |= AT91C_BCRAMC_EN;    
+    __writeMemory32(0x00001131,0xFFFFE400,"Memory");
+        
+    __delay(100);            
+        
+    // Perform a write to the Cellular Ram  device and the Bus Configuration Register (BCR) and 
+    // Refresh Configuration Register (RCR) are programmed automatically.         
+    // Dummy write to access BCRAM : validate preceeding command
+    //pBcram[0]    = 0x00000000;    
+    __writeMemory32(0x00000000,0x20000000,"Memory");
+
+    __message "------------------------------- BCRAM Done at 100 MHz -------------------------------";
+}
+
+
+/*********************************************************************
+*
+*       _MapRAMAt0()
+* Function description
+* Remap RAM at 0
+*/
+_MapRAMAt0()
+{
+// AT91C_MATRIX_MRCR ((AT91_REG *) 	0xFFFFEB00) // (MATRIX)  Master Remp Control Register
+    __mac_i=__readMemory32(0xFFFFEB00,"Memory");
+    __message "----- AT91C_MATRIX_MRCR  : 0x",__mac_i:%X;
+
+    if ( ((__mac_i & 0x01) == 0) || ((__mac_i & 0x02) == 0)){
+        __message "------------------------------- The Remap is NOT & REMAP ----------------------------";
+    __writeMemory32(0x00000003,0xFFFFEB00,"Memory");
+        __mac_i=__readMemory32(0xFFFFEB00,"Memory");
+        __message "----- AT91C_MATRIX_MRCR  : 0x",__mac_i:%X;
+    } else {
+        __message "------------------------------- The Remap is done -----------------------------------";
+    }
+}
+
+
+/*********************************************************************
+*
+*       __PllSetting()
+* Function description
+*   Initializes the PMC.
+*   1. Enable the Main Oscillator
+*   2. Configure PLL
+*   3. Switch Master
+*/
+__PllSetting()
+{
+    // The selected clock is the Slow Clock ?
+    if ((__readMemory32(0xFFFFFC30,"Memory")&0x3) != 0 ) // AT91C_PMC_MCKR
+    { 
+        // Disable all PMC interrupt
+        // AT91C_PMC_IDR   ((AT91_REG *) 0xFFFFFC64) //(PMC) Interrupt Disable Register
+        __writeMemory32(0xFFFFFFFF,0xFFFFFC64,"Memory");
+    
+        // Stop all peripheral clock
+        // AT91C_PMC_PCDR  ((AT91_REG *) 0xFFFFFC14) //(PMC) Peripheral Clock Disable Register
+        __writeMemory32(0xFFFFFFFF,0xFFFFFC14,"Memory");
+    
+        // Disable all clocks. Only Processor clock is enabled.    
+        // AT91C_PMC_SCDR  ((AT91_REG *) 0xFFFFFC04) //(PMC) System Clock Disable Register
+        __writeMemory32(0xFFFFFFFE,0xFFFFFC04,"Memory"); // AT91C_PMC_SCDR
+
+        // AT91C_PMC_MCKR  ((AT91_REG *) 	0xFFFFFC30) // (PMC) Master Clock Register // main clock is selected
+        __writeMemory32(0x00000001,0xFFFFFC30,"Memory");
+        __delay(10);
+
+        // write reset value to PLLA and PLLB
+        // AT91C_PMC_PLLAR ((AT91_REG *) 	0xFFFFFC28) // (PMC) PLL A Register
+        __writeMemory32(0x00003F00,0xFFFFFC28,"Memory");
+
+        // AT91C_PMC_PLLBR ((AT91_REG *) 	0xFFFFFC2C) // (PMC) PLL B Register
+        __writeMemory32(0x00003F00,0xFFFFFC2C,"Memory");
+        __delay(10);
+
+       __message "------------------------------- PLL  Enable -----------------------------------------";
+   }
+   else
+   {
+       __message " ********* Core in SLOW CLOCK mode ********* "; 
+   }
+}
+
+
+/*********************************************************************
+*
+*       __PllSetting100MHz()
+* Function description
+*   Set core at 200 MHz and MCK at 100 MHz
+*/
+__PllSetting100MHz()
+{
+
+   __message "------------------------------- PLL Set at 100 MHz ----------------------------------";
+
+//* pPmc->PMC_MOR = (( AT91C_CKGR_OSCOUNT & (0x40 <<8) | AT91C_CKGR_MOSCEN ));
+    __writeMemory32(0x00004001,0xFFFFFC20,"Memory");
+    __delay(10);
+// AT91C_PMC_MCKR  ((AT91_REG *) 	0xFFFFFC30) // (PMC) Master Clock Register
+    __writeMemory32(0x00000001,0xFFFFFC30,"Memory");
+    __delay(10);
+//*   AT91C_BASE_CKGR->CKGR_PLLAR = (AT91C_CKGR_SRCA | ((49 << 16) & AT91C_CKGR_MULA) |
+//    (AT91C_CKGR_PLLACOUNT | (AT91C_CKGR_OUTA_0 | (3);
+    __writeMemory32(0x2031BF03,0xFFFFFC28,"Memory");
+    __delay(10);
+//*   AT91C_BASE_PMC->PMC_MCKR =  AT91C_PMC_CSS_PLLA_CLK | AT91C_PMC_PRES_CLK | AT91C_PMC_MDIV_2;;
+    __writeMemory32(0x00000102,0xFFFFFC30,"Memory");
+     __delay(10);
+
+}
+

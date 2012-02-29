@@ -1,0 +1,119 @@
+/* ----------------------------------------------------------------------------
+ *         ATMEL Microcontroller Software Support 
+ * ----------------------------------------------------------------------------
+ * Copyright (c) 2008, Atmel Corporation
+ *
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * - Redistributions of source code must retain the above copyright notice,
+ * this list of conditions and the disclaimer below.
+ *
+ * Atmel's name may not be used to endorse or promote products derived from
+ * this software without specific prior written permission.
+ *
+ * DISCLAIMER: THIS SOFTWARE IS PROVIDED BY ATMEL "AS IS" AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT ARE
+ * DISCLAIMED. IN NO EVENT SHALL ATMEL BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+ * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * ----------------------------------------------------------------------------
+ */
+
+//------------------------------------------------------------------------------
+// Remaps the internal SRAM at address 0 and configures the master clock.
+//------------------------------------------------------------------------------
+execUserReset()
+{
+    __message "------------------------------ execUserReset ---------------------------------";
+    
+    // Remap
+    MapRamAt0();
+
+    // Configure clock
+    ConfigureMck();
+}
+
+//------------------------------------------------------------------------------
+// Performs a hardware reset, remaps the internal SRAM, configures the master
+// clock and the reset controller.
+//------------------------------------------------------------------------------
+execUserPreload()
+{
+    __message "------------------------------ execUserPreload ---------------------------------";
+    
+    // Reset
+    __hwReset(0);
+
+    // Set CPSR
+    __writeMemory32(0xD3, 0x98, "Register");
+
+    // Remap
+    MapRamAt0();
+
+    // Configure clock
+    ConfigureMck();
+
+    // Enable user reset
+    __writeMemory32(0xA5000001, 0xFFFFFD08, "Memory");
+}
+
+//------------------------------------------------------------------------------
+// Remaps the internal SRAM at address 0x0.
+//------------------------------------------------------------------------------
+MapRamAt0()
+{
+    __message "------------------------------- SRAM @0x0 ----------------------------------";
+
+    __writeMemory32(0x03, 0xFFFFEF00, "Memory");
+}
+
+//------------------------------------------------------------------------------
+// Configures the master clock at the best possible frequency.
+//------------------------------------------------------------------------------
+ConfigureMck()
+{
+    __message "------------------------------- PLL @133MHz ----------------------------------";
+
+    // If clock is already configured, reset settings
+    if ((__readMemory32(0xFFFFFC30, "Memory") & 0x3) != 0) {
+
+        // Disable interrupts and clocks
+        __writeMemory32(0xFFFFFFFF, 0xFFFFFC64, "Memory"); // PMC_IDR
+        __writeMemory32(0xFFFFFFFF, 0xFFFFFC14, "Memory"); // PMC_PCDR
+        __writeMemory32(0xFFFFFFFE, 0xFFFFFC04, "Memory"); // PMC_SCDR
+
+        // Switch to main oscillator
+        __writeMemory32(0x00000001 ,0xFFFFFC30, "Memory"); // PMC_MCKR
+        __delay(10);
+
+        // Set default PLL settings
+        __writeMemory32(0x00003F00, 0xFFFFFC28, "Memory"); // PMC_PLLAR
+        __writeMemory32(0x00003F00, 0xFFFFFC2C, "Memory"); // PMC_PLLBR
+        __delay(10);
+    }
+
+    // Enable mainosc
+    __writeMemory32(0x00004001, 0xFFFFFC20, "Memory");
+    __delay(10);
+
+    // Switch to mainosc
+    __writeMemory32(0x00000001, 0xFFFFFC30, "Memory");
+    __delay(10);
+
+    // Configure PLLA
+    __writeMemory32(0x202A0101, 0xFFFFFC28, "Memory");
+    __delay(10);
+
+    // Switch to PLLA
+    __writeMemory32(0x00001302, 0xFFFFFC30, "Memory");
+    __delay(10);
+}
+
